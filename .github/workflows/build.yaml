@@ -3,8 +3,8 @@ name: Build Go Proj
 on:
   push:
     branches: [ "main" ]
-  # pull_request:
-  #   branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
 
 jobs:
 
@@ -21,9 +21,19 @@ jobs:
         go-version: '1.24'
 
     - name: Build
-      run: go build -v ./...
+      run: go build -v -o binary ./...
 
     # - name: Test
     #   run: go test -v ./...
 
+    - name: Test
+      run: | 
+        if [ "$(./binary)" = "hello" ]; then
+          echo "✅ Output matches"
+        else
+          echo "❌ Output does not match"
+        fi
+        
+
+    
     
